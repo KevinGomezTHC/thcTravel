@@ -211,42 +211,86 @@
             <h2>Comienza tu proceso internacional hoy.</h2>
           </div>
 
-          <form action="https://formsubmit.co/admin4@thehospitalitycenter.net" method="POST">
+<form
+  id="registroForm"
+  action="https://formsubmit.co/ajax/admin4@thehospitalitycenter.net"
+  method="POST"
+>
 
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="gracias.html">
+  <!-- CONFIG -->
+  <input type="hidden" name="_captcha" value="false">
 
-            <div class="input-row">
+  <input
+    type="hidden"
+    name="_subject"
+    value="Nueva solicitud THC Travel"
+  >
 
-              <div>
-                <label>Nombre completo</label>
+  <input
+    type="hidden"
+    name="_template"
+    value="table"
+  >
 
-                <input type="text" name="nombre" placeholder="Tu nombre" required>
-              </div>
+  <!-- FILA -->
+  <div class="input-row">
 
-              <div>
-                <label>Correo electrónico</label>
+    <!-- NOMBRE -->
+    <div>
 
-                <input type="email" name="correo" placeholder="tu.correo@ejemplo.com" required>
-              </div>
+      <label>Nombre completo</label>
 
-            </div>
+      <input
+        type="text"
+        name="nombre"
+        placeholder="Tu nombre"
+        required
+      >
 
-            <div>
-              <label>Información adicional</label>
+    </div>
 
-              <textarea name="mensaje"
-                placeholder="Cuéntanos tu perfil, experiencia laboral y motivación para trabajar en Europa"
-                required></textarea>
-            </div>
+    <!-- EMAIL -->
+    <div>
 
-            <div>
-              <button class="button button-primary">
-                Enviar Solicitud
-              </button>
-            </div>
+      <label>Correo electrónico</label>
 
-          </form>
+      <input
+        type="email"
+        name="correo"
+        placeholder="tu.correo@ejemplo.com"
+        required
+      >
+
+    </div>
+
+  </div>
+
+  <!-- MENSAJE -->
+  <div>
+
+    <label>Información adicional</label>
+
+    <textarea
+      name="mensaje"
+      placeholder="Cuéntanos tu perfil, experiencia laboral y motivación para trabajar en Europa"
+      required
+    ></textarea>
+
+  </div>
+
+  <!-- BOTON -->
+  <div>
+
+    <button
+      type="submit"
+      class="button button-primary"
+    >
+      Enviar Solicitud
+    </button>
+
+  </div>
+
+</form>
         </div>
       </div>
 
