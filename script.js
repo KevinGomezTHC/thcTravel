@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ANIMACIONES REVEAL
+  // REVEAL
   const reveals = document.querySelectorAll('.reveal');
 
   const revealObserver = new IntersectionObserver((entries) => {
+
     entries.forEach((entry) => {
+
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
       }
+
     });
+
   }, {
     threshold: 0.15
   });
@@ -52,53 +56,57 @@ document.addEventListener('DOMContentLoaded', () => {
   // FORMULARIO
   const form = document.getElementById('registroForm');
 
-  form.addEventListener('submit', async function(e){
+  if(form){
 
-    e.preventDefault();
+    form.addEventListener('submit', async (e) => {
 
-    const formData = new FormData(form);
+      e.preventDefault();
 
-    try{
+      const formData = new FormData(form);
 
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+      try{
 
-      if(response.ok){
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Registro completado',
-          text: 'Tu solicitud fue enviada correctamente.',
-          confirmButtonColor: '#dc2626'
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json'
+          }
         });
 
-        form.reset();
+        if(response.ok){
 
-      }else{
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro completado',
+            text: 'Tu solicitud fue enviada correctamente.',
+            confirmButtonColor: '#dc2626'
+          });
+
+          form.reset();
+
+        }else{
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudo enviar el formulario.'
+          });
+
+        }
+
+      }catch(error){
 
         Swal.fire({
           icon: 'error',
-          title: 'Error',
-          text: 'No se pudo enviar la solicitud.'
+          title: 'Error de conexión',
+          text: 'Verifica tu internet o intenta nuevamente.'
         });
 
       }
 
-    }catch(error){
+    });
 
-      Swal.fire({
-        icon: 'error',
-        title: 'Error de conexión',
-        text: 'Inténtalo nuevamente.'
-      });
-
-    }
-
-  });
+  }
 
 });
