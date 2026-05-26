@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
           icon: 'success',
           title: 'Registro completado',
-          text: 'Tu solicitud fue enviada correctamente.',
+          text: '¡Gracias por tu solicitud! Estaremos en contacto pronto para brindarte más información sobre el programa.',
           confirmButtonColor: '#dc2626'
         });
 
