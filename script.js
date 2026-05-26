@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formData = new FormData(form);
 
+    // Limpiar formulario inmediatamente
+    form.reset();
+
     try{
 
       const response = await fetch(form.action, {
@@ -67,8 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
           text: '¡Gracias por tu solicitud! Estaremos en contacto pronto para brindarte más información sobre el programa.',
           confirmButtonColor: '#dc2626'
         });
-
-        form.reset();
 
       }else{
 
