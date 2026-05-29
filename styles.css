@@ -165,7 +165,7 @@ p { color: var(--ink-3); line-height: 1.8; font-size: .95rem; }
   flex-shrink: 0;
 }
 .logo-img {
-  height: 100px;
+  height: 80px;
   width: auto;
   object-fit: contain;
   mix-blend-mode: screen;
@@ -567,6 +567,9 @@ textarea { min-height: 160px; resize: vertical; }
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 1024px) {
+  .logo-img {
+  height: 68px;
+  }
   .nav-inner { padding: 20px 30px; }
   .nav-scrolled .nav-inner { padding: 14px 30px; }
   .hero-content { padding: 140px 30px 60px; }
@@ -577,6 +580,9 @@ textarea { min-height: 160px; resize: vertical; }
 }
 
 @media (max-width: 768px) {
+  .logo-img {
+  height: 68px;
+  }
   .nav-links, .nav-cta { display: none; }
   .hero-stats { flex-wrap: wrap; gap: 20px; }
   .stat-div { display: none; }
