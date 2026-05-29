@@ -1,96 +1,55 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const reveals = document.querySelectorAll('.reveal');
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.15
-  });
-
-  reveals.forEach((element) => revealObserver.observe(element));
-
-  const links = document.querySelectorAll('.sidebar a');
-  const sections = document.querySelectorAll('section');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-
-    sections.forEach((section) => {
-      const top = section.offsetTop;
-
-      if (window.scrollY >= top - 300) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    links.forEach((link) => {
-      link.classList.remove('active');
-
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
-
-    });
-
-  });
-
-
-
-  // FORMULARIO
-  const form = document.getElementById('registroForm');
-
-  form.addEventListener('submit', async function(e){
-
+// Form submission with SweetAlert2
+const form = document.getElementById('registroForm');
+if (form) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
 
-    const formData = new FormData(form);
-
-    // Limpiar formulario inmediatamente
-    form.reset();
-
-    try{
-
-      const response = await fetch(form.action, {
+    try {
+      const res = await fetch(form.action, {
         method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
       });
-
-      if(response.ok){
-
+      const data = await res.json();
+      if (data.success === 'true' || data.success === true) {
         Swal.fire({
           icon: 'success',
-          title: 'Registro completado',
-          text: '¡Gracias por tu solicitud! Estaremos en contacto pronto para brindarte más información sobre el programa.',
-          confirmButtonColor: '#dc2626'
+          title: '¡Solicitud enviada!',
+          text: 'Nos pondremos en contacto contigo pronto.',
+          confirmButtonColor: '#c9a96e',
+          confirmButtonText: 'Entendido'
         });
-
-      }else{
-
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudo enviar la solicitud.'
-        });
-
+        form.reset();
+      } else {
+        throw new Error();
       }
-
-    }catch(error){
-
+    } catch {
       Swal.fire({
         icon: 'error',
-        title: 'Error de conexión',
-        text: 'Inténtalo nuevamente.'
+        title: 'Error al enviar',
+        text: 'Por favor intenta nuevamente o escríbenos directamente.',
+        confirmButtonColor: '#c9a96e'
       });
-
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar solicitud';
     }
-
   });
+}
 
-});
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  const pos = window.scrollY + 120;
+  sections.forEach(sec => {
+    if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${sec.id}`);
+      });
+    }
+  });
+}, { passive: true });
